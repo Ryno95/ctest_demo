@@ -15,13 +15,12 @@ CTEST_SETUP(operations_test)
     data->second_num = 6;
 }
 
-CTEST(operations_test, num_compare)
+CTEST(simple_test, num_compare)
 {
     ASSERT_EQUAL(1, 1);
 }
 
 CTEST2(operations_test, basic_sum)
 {
-    printf("HERE!!!\n");
     ASSERT_EQUAL(15, sum(data->first_num, data->second_num));
 }
