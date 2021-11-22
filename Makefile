@@ -1,69 +1,33 @@
 NAME=mathing
+TEST_NAME=test_mathing
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-TEST_CFLAGS=-ggdb3 $(CFLAGS)
 
-TEST_SRCS=main.c\
-		calculator.c\
-		tests.c
+SRCS= main.c calculator.c
+
+TEST_SRCS= Unit_tests/main.c\
+		Unit_tests/tests.c\
+		calculator.c
 
 all:$(NAME)
 
-$(NAME): $(TEST_SRCS)
-	$(CC) $(TEST_CFLAGS) $(TEST_SRCS) -o $(NAME)
+$(NAME): $(SRCS)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
-# %.o: %.c
-# 	$(CC) -c $(CFLAGS)  -o $@ $<
+test: $(SRCS) $(TEST_SRCS)
+	$(CC) $(CFLAGS) $(TEST_SRCS) -o $(TEST_NAME)
+
+acceptence: $(NAME)
+	./Acceptence_test/acceptence.sh
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
 	rm -f $(NAME)
+	rm -f $(TEST_NAME)
+	rm -f *.o
 
 re: fclean all
 
 fclean: clean
-
-
-# NAME=mathing
-# CC=gcc
-# CFLAGS=-Wall -Wextra -Werror -fsanitize=address
-# TEST_CFLAGS=-ggdb3 $(CFLAGS)
-
-# TEST_SRCS=main.c\
-# 		calculator.c\
-# 		tests.c
-
-# all:$(NAME)
-
-# $(NAME): $(TEST_SRCS)
-# 	$(CC) $(TEST_CFLAGS) $(TEST_SRCS) -o $(NAME)
-
-# clean:
-# 	rm -f $(NAME)
-
-# re: fclean all
-
-# fclean: clean
-
-# NAME=mathing
-# CC=gcc
-# CFLAGS=-Wall -Wextra -Werror
-# TEST_CFLAGS=-ggdb3 $(CFLAGS)
-
-# TEST_SRCS=main.c\
-# 		calculator.c\
-# 		tests.c
-
-# all:$(NAME)
-
-# $(NAME): $(TEST_SRCS)
-# 	$(CC) $(TEST_CFLAGS) $(TEST_SRCS) -o $(NAME)
-
-# # test_run: $(NAME)
-# # 	./$(NAME)
-
-# clean:
-# 	rm -f $(NAME)
-
-# re: fclean all
-
-# fclean: clean
